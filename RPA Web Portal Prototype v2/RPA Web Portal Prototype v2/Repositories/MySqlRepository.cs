@@ -37,6 +37,12 @@ public class MySqlRepository
         var user = await _context.UserTable.FirstOrDefaultAsync(theUser => theUser.Id == id);
         return user;
     }
+    
+    public async Task<User?> GetUserByRt(string rt)
+    {
+        var user = await _context.UserTable.FirstOrDefaultAsync(theUser => theUser.RefreshToken == rt);
+        return user;
+    }
     //Login related stuff ends here//
     
     
@@ -54,7 +60,8 @@ public class MySqlRepository
     public async Task UserTokenBinding(User user, RefreshToken refreshToken)
     {
         var retrievedUser = await GetUserByName(user.Username);
-        retrievedUser!.RefreshTokens.Add(refreshToken);
+        retrievedUser!.RefreshToken = refreshToken.Token;
+        retrievedUser!.RefreshTokenExpiry = refreshToken.Expires;
         refreshToken.UserId = retrievedUser.Id;
         await _context.SaveChangesAsync();
     }

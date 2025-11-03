@@ -56,6 +56,14 @@ public class LoginController : Controller
     {
         var jwtAccessToken = Request.Cookies["jwt"];
         var rt = Request.Cookies["rt"];
+
+        if (string.IsNullOrEmpty(rt)) return Unauthorized("No RefreshToken Found in Cookie");
+
+        var user = await _repo.GetUserByRt(rt);
+        if (user == null) return Unauthorized("Logged in another Session!");
+
+        if (user.RefreshTokenExpiry <= DateTime.UtcNow) return Unauthorized("RefreshToken Expired!");
+        
         var retrievedOldToken = await _repo.GetRefreshTokenByToken(rt!);
         var retrievedUser = await _repo.GetUserById(retrievedOldToken!.UserId);
         var newAccessToken = _generator.GenerateJwtToken(retrievedUser!);

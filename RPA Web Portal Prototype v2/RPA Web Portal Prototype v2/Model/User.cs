@@ -11,5 +11,7 @@ public class User
     public string Role { get; set; } = "inputter";
     public string Branch { get; set; } = "dehiwala";
 
-    public List<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
+    public string? RefreshToken { get; set; }
+    
+    public DateTime? RefreshTokenExpiry { get; set; }
 }

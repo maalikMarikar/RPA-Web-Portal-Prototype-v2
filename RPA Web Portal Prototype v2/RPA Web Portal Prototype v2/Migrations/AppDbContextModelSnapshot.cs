@@ -51,8 +51,6 @@ namespace RPA_Web_Portal_Prototype_v2.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("RefreshTokens");
                 });
 
@@ -72,6 +70,12 @@ namespace RPA_Web_Portal_Prototype_v2.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("RefreshTokenExpiry")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -83,20 +87,6 @@ namespace RPA_Web_Portal_Prototype_v2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("RPA_Web_Portal_Prototype_v2.Model.RefreshToken", b =>
-                {
-                    b.HasOne("RPA_Web_Portal_Prototype_v2.Model.User", null)
-                        .WithMany("RefreshTokens")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RPA_Web_Portal_Prototype_v2.Model.User", b =>
-                {
-                    b.Navigation("RefreshTokens");
                 });
 #pragma warning restore 612, 618
         }
