@@ -34,7 +34,7 @@ public class TokenGenerator
             issuer: jwtIssuer,
             audience: jwtAudience,
             claims: claims,
-            expires: DateTime.Now.AddMinutes(15),
+            expires: DateTime.Now.AddSeconds(15),
             signingCredentials: creds
         );
 

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RPA Web Portal Prototype v2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66ddb4e9e7eec57fbe869d96f8b3d38e26f632a2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e852ae8bfec7690f2a851eb5fea4762d81da6ee")]
 [assembly: System.Reflection.AssemblyProductAttribute("RPA Web Portal Prototype v2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RPA Web Portal Prototype v2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

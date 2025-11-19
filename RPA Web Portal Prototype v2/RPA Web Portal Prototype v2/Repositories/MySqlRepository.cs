@@ -63,6 +63,7 @@ public class MySqlRepository
         retrievedUser!.RefreshToken = refreshToken.Token;
         retrievedUser!.RefreshTokenExpiry = refreshToken.Expires;
         refreshToken.UserId = retrievedUser.Id;
+        await _context.RefreshTokens.AddAsync(refreshToken);
         await _context.SaveChangesAsync();
     }
 

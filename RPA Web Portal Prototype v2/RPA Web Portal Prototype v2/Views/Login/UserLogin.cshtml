@@ -1,0 +1,81 @@
+@page
+@model RPA_Web_Portal_Prototype_v2.Views.Login.UserLogin
+
+@{
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+
+
+<body class="min-h-screen bg-purple-950  flex items-center justify-center" style="font-family:cursive;">
+
+
+    <div class="shadow-3xl flex flex-col md:flex-row w-full max-w-6xl min-h-[20vh] md:min-h-[90vh]">
+
+        
+
+        <div class="flex-[2] hidden md:flex md:flex-col bg-purple-700 rounded-tl-3xl rounded-bl-3xl">
+
+            <div class="flex-[1] flex flex-col justify-center items-center">
+                <h1 class="text-3xl font-bold text-white">Amana Bank PLC</h1>
+                <h1 class="text-3xl font-bold text-white">Robotic Process Automation (RPA)</h1>
+                <h1 class="text-3xl font-bold text-white">Web Portal</h1>
+            </div>
+
+            <div class="flex-[2] flex justify-center items-end space-x-24">
+                <img src="bye2.png" alt="Sample" class="w-54 h-20">
+                <img src="hi.png" alt="Sample" class="w-54 h-20">
+            </div>
+
+        </div>
+
+        <div class="flex-[1] flex justify-center items-center bg-gray-300 rounded-3xl md:rounded-none md:rounded-tr-3xl md:rounded-br-3xl">
+
+            <div class="flex flex-col w-full h-full">
+                <div class="flex-[1] mt-8 ml-4">
+                    <div class="mb-16">
+                        <h1 class="text-3xl font-bold">HELLO, <BR> WELCOME BACK</h1>
+                    </div>
+
+                    
+                </div>
+
+                <div class="flex-[2] w-full">
+                    <div class="mb-4 pl-4">
+                        @if (ViewBag.Error != null)
+                        {
+                            <h4 class="font-bold text-red-600">@ViewBag.Error</h4>
+                        }
+                        else if (ViewBag.Message != null && !string.IsNullOrEmpty(ViewBag.Message.ToString()))
+                        {
+                            <h4 class="font-bold text-red-600">@ViewBag.Message</h4>
+                        }
+                        else
+                        {
+                            <h4 class="font-semibold text-gray-600">Please Sign in to Continue</h4>
+                        }
+
+                        
+                    </div>
+                    <form asp-action="UserLogin" method="post" class="w-full flex-col items-center justify-center pl-4 pr-4 space-y-4 mb-8">
+                        <input class="w-full p-3 border-gray-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-900" type="text" placeholder="Username" name="username">
+                        <input class="w-full p-3 rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-900" type="text" placeholder="Password" name="password">
+                        <button class="w-full p-3 border-gray-300 rounded-xl bg-purple-700 font-bold text-gray-300 hover:bg-purple-950 transition">Login</button>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    </body>
+
+
+</html>

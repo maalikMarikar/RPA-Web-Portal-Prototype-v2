@@ -1,0 +1,81 @@
+@page
+@model RPA_Web_Portal_Prototype_v2.Views.MainPage.AuthPage
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div class="flex flex-col items-center justify-center">
+    <h1>Hi Authorizer :)</h1>
+    <button id="theotherbutton">Click</button>
+    <p id="cunt"></p>
+</div>
+</body>
+<script>
+    async function GetStuff(){
+        try{
+            let response = await fetch("/MainPage/AuthDoSomething/")
+
+            if (response.status === 401) {
+                console.log("401 inside GetStuff — refreshing...");
+
+                const refreshed = await Refresh();
+
+                if (!refreshed) {
+                    document.getElementById("cunt").innerHTML = "Login expired.";
+                    return;
+                }
+
+                // retry after refresh
+                response = await fetch("/MainPage/AuthDoSomething/", {
+                    credentials: "include"
+                });
+            }
+            
+            if(!response.ok){
+                throw new Error("smthn happened :(")
+            }
+            
+            document.getElementById("cunt").innerHTML = await response.text();
+        }
+        catch (err){
+            document.getElementById("cunt").innerHTML = "Smthn Happened " + err;
+        }
+    }
+    
+    document.getElementById("theotherbutton").addEventListener("click", ()=> GetStuff());
+
+    async function Refresh() {
+        try {
+            const response = await fetch("/Login/Refresh", {
+                method: "POST",
+                credentials: "include"   // VERY IMPORTANT
+            });
+
+            if (!response.ok) {
+                window.location.replace("/Login/UserLogin?msg=User logged in on another device");
+
+            }
+            
+
+            console.log("Token refreshed successfully.");
+            return true;
+
+        } catch (err) {
+            console.log("Refresh failed: " + err);
+            window.location.replace("/Login/UserLogin?msg=User logged in on another device");
+
+            return false;
+        }
+    }
+
+
+</script>
+</html>
