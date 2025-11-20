@@ -2,40 +2,98 @@
 @model RPA_Web_Portal_Prototype_v2.Views.MainPage.InputterPage
 
 @{
-    Layout = null;
+    
 }
 
-<!DOCTYPE html>
-
-<html>
+<!doctype html>
+<html lang="eng">
 <head>
-    <title></title>
+    <title>Branch Inputter Page</title>
+    
 </head>
-<body>
-<div class="flex flex-col items-center justify-center">
-    <h1>hi inputter :)</h1>
-    <button id="thebtn" onclick="InpDoSmth()">ClickMe</button>
-    <p id="resultMsg" style="margin-top:20px; color: blue; font-size: 20px;"></p>
-</div>
-</body>
+<body class="min-h-screen" style="font-family: cursive;">
 
+    <div class="flex flex-col min-h-screen">
+        <div class="bg-[#333333] text-white flex-[1] sticky top-0 border-blue-600 border-b-2 border-b flex p-2 shadow-lg">
+
+            <div class="flex-[1] flex flex-col items-start justify-center font-bold ">
+                <!-- <span>Amana Bank PLC</span>
+                <span>RPA Web Portal</span>
+                <span>Branch-Wise Inputter</span> -->
+                <img src="uipath.png" class="max-h-16 w-auto" />
+
+
+
+            </div>
+
+            <div class="flex-[1] flex flex-col md:flex-row items-center justify-center font-bold text-sm md:space-x-4 space-y-2 md:space-y-0">
+                <span>User: <span id="usir" class="bg-blue-500 p-1 rounded-lg"></span></span>
+                <span>Branch: <span id="brn" class="bg-blue-500 p-1 rounded-lg"></span></span>
+                <span>Date: <span id="dtn" class="bg-blue-500 p-1 rounded-lg"></span></span>
+            </div>
+
+            <div class="flex-[1] flex items-center justify-end">
+                <button class="bg-blue-500 p-2 rounded-lg hover:bg-blue-700">Log-Out</button>
+            </div>
+        </div>
+
+        <div class="flex-[500] flex">
+            <div class="flex-[1] bg-[#333333] text-white p-2 space-y-2 border-blue-600 border-r-2 border-r shadow-lg">
+                <div class="w-full text-center font-bold text-xl">Settlements</div>
+                <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700" onclick="loadForm('RegularSettlement')">Regular Settlement</button>
+                <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700">Early Settlement Ijara</button>
+                <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700">WMT Full Settlement</button>
+                <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700">WMT Partial Settlement</button>
+                <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700">DM Full Settlement</button>
+                <div class="w-full text-center font-bold text-xl">Disbursements</div>
+                <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700">Extended Murabaha</button>
+                <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700">Local Murabaha</button>
+                <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700">WMT Disbursement</button>
+                <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700">Ijara Disbursement</button>
+            </div>
+
+            <div id="formArea" class="flex-[5] p-4 bg-[#333333] text-white">
+                form area is here
+            </div>
+        </div>
+
+    </div>
+
+</body>
 <script>
-    async function InpDoSmth(){
-        
+
+    
+    document.getElementById("usir").innerHTML = GetCookie("uzn");
+    
+
+    
+    document.getElementById("brn").innerHTML = GetCookie("brnch");
+
+
+    document.getElementById("dtn").innerHTML = GetCookie("dtnow");
+    
+
+
+
+   function GetCookie(){
+       
+   }
+
+    async function refresh(){
         try{
-            let response = await fetch("/MainPage/InputterDoSomething/")
-            if(!response.ok){
-                throw new Error("Failed to fetch data!")
+            let refRes = await fetch("/Login/Refresh/")
+            if(!refRes.ok){
+                throw new Error("Refresh Failed")
             }
-            let message = await response.text()
-            document.getElementById("resultMsg").innerHTML = message
         }
-        catch (e) {
+        catch(e){
             alert(e)
         }
-        
-        
     }
 </script>
 
 </html>
+
+
+
+

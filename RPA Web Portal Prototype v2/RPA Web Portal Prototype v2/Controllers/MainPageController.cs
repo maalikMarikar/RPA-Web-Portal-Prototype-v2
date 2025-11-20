@@ -31,4 +31,16 @@ public class MainPageController : Controller
         var message = "Hello Authorizer";
         return Ok(message);
     }
+
+    public IActionResult RegularSettlement()
+    {
+        return PartialView();
+    }
+
+    // [HttpPost]
+    // [Authorize(Roles = "inputter")]
+    // public IActionResult BrUserSaveTrx(string)
+    // {
+    //     
+    // }
 }

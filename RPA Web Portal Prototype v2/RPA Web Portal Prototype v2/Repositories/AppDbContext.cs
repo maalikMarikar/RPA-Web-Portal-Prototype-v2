@@ -8,6 +8,8 @@ public class AppDbContext : DbContext
     public DbSet<User> UserTable { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     
+    public DbSet<TransactionBase> Transactions { get; set; }
+    
     public AppDbContext(){}
     
     public AppDbContext(DbContextOptions<AppDbContext> opt):base(opt){}
@@ -20,4 +22,11 @@ public class AppDbContext : DbContext
             optionsBuilder.UseMySql(connectString, ServerVersion.AutoDetect(connectString));
         }
     }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<RegularSettlement>().HasBaseType<TransactionBase>();
+        modelBuilder.Entity<TestTrxType>().HasBaseType<TransactionBase>();
+    }
+
 }

@@ -42,7 +42,6 @@ public class LoginController : Controller
         var user = await _repo.GetUserByName(username);
         if (user is null)
         {
-            ViewBag.Error = "Invalid Username";
             return View();
         }
         var result = _hasher.VerifyPw(user, password);
@@ -70,8 +69,29 @@ public class LoginController : Controller
         {
             HttpOnly = false,
             Secure = false,
-            SameSite = SameSiteMode.Lax,
+            SameSite = SameSiteMode.Strict,
             Expires = DateTime.UtcNow.AddDays(7)
+        });
+        
+        Response.Cookies.Append("uzn",user.Username, new CookieOptions
+        {
+            HttpOnly = false,
+            Secure = false,
+            SameSite = SameSiteMode.Lax
+        });
+        
+        Response.Cookies.Append("brnch", user.Branch, new CookieOptions
+        {
+            HttpOnly = false,
+            Secure = false,
+            SameSite = SameSiteMode.Lax
+        });
+        
+        Response.Cookies.Append("dtnow",System.DateTime.Now.ToString("dd-MM-yyyy"), new CookieOptions
+        {
+            HttpOnly = false,
+            Secure = false,
+            SameSite = SameSiteMode.Lax
         });
     
         if (user.Role == "inputter")
@@ -81,6 +101,7 @@ public class LoginController : Controller
         
         if (user.Role == "auth")
         {
+            
             return RedirectToAction("authPage", "MainPage");
         }
         

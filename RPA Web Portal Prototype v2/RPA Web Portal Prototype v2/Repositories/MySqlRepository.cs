@@ -76,6 +76,14 @@ public class MySqlRepository
         retrievedOldToken!.Revoked = DateTime.UtcNow;
         await _context.SaveChangesAsync();
     }
+
+
+
+    public async Task SaveTransactionToDb(TransactionBase theTransaction)
+    {
+        await _context.Transactions.AddAsync(theTransaction);
+        await _context.SaveChangesAsync();
+    }
     
     
     

@@ -1,0 +1,114 @@
+﻿@*
+  THIS IS A PARTIAL VIEW — no layout, no head, no html tag
+*@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body style="font-family:monospace;">
+    <form asp-action="BrUserSaveTrx" method="get">
+        <h1 class="text-3xl font-bold text-center">Regular Settlement</h1>
+
+        <div class="flex flex-col mt-6 space-y-10">
+
+            <div class="flex flex-col md:flex-row justify-around space-y-4 md:space-y-0">
+                <div>
+                <label for="br_nm">Branch Name:</label>
+                <input autocomplete="off" type="text" id="br_nm" name="theName" class="p-1 text-black rounded-lg bg-gray-600 border border-2 border-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                </div>
+
+                <div>
+                <label for="br_no">Branch No:</label>
+                <input type="text" id="br_no" name="theNumber" class="p-1 text-black rounded-lg bg-gray-600 border border-2 border-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                </div> 
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-around space-y-4 md:space-y-0">
+                <div>
+                <label for="cif_no">CIF Number:</label>
+                <input type="text" id="cif_no" name="theCif" class="p-1 text-black rounded-lg bg-gray-600 border border-2 border-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                </div>
+
+                <div>
+                <label for="deal_no">Deal Number:</label>
+                <input type="text" id="deal_no" name="theDeal" class="p-1 text-black rounded-lg bg-gray-600 border border-2 border-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                </div> 
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-around space-y-4 md:space-y-0">
+                <div>
+                <label for="prdct_tp">Product Type:</label>
+                <input type="text" id="prdct_tp" name="theProduct" class="p-1 text-black rounded-lg bg-gray-600 border border-2 border-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                </div>
+
+                <div>
+                <label for="fin_amnt">Final Amount:</label>
+                <input type="text" id="fin_amnt" name="theFin" class="p-1 text-black rounded-lg bg-gray-600 border border-2 border-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                </div> 
+            </div>
+
+
+
+            
+
+
+            
+            <div class="flex flex-col md:items-center md:space-y-8">
+            <div>
+                <p class="text-start">Recovery Account Details</p>
+            </div>
+            <div class="flex flex-col md:flex-row space-x-0 md:space-x-2 text-black space-y-2 md:space-y-0">
+                <input name="f1" class="text-sm text-white max-w-16 rounded border border-2 border-blue-600 outline-none focus:ring-2 focus:border-blue-600 bg-gray-600 transition">
+                <input name="f2" class="text-sm text-white max-w-16 rounded border border-2 border-blue-600 outline-none focus:ring-2 focus:border-blue-600 bg-gray-600 transition">
+                <input name="f3" class="text-sm text-white max-w-16 rounded border border-2 border-blue-600 outline-none focus:ring-2 focus:border-blue-600 bg-gray-600 transition">
+                <input name="f4" class="text-sm text-white max-w-16 rounded border border-2 border-blue-600 outline-none focus:ring-2 focus:border-blue-600 bg-gray-600 transition">
+                <input name="f5" class="text-sm text-white max-w-16 rounded border border-2 border-blue-600 outline-none focus:ring-2 focus:border-blue-600 bg-gray-600 transition">
+            </div>
+
+
+
+            <div class="flex flex-col">
+                <p class="text-center">Branch Inputter Remarks:</p>
+                <input type="text" id="fin_amnt" name="" class="p-1 text-black rounded-lg bg-gray-600 border border-2 border-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                </div> 
+
+
+            </div>
+
+
+<!-- Button Below -->
+            <div class="flex justify-center items-center space-x-2">
+                <button type="submit" class="w-full max-w-20 bg-blue-500 p-2 rounded">Save</button>
+                <button type="reset" class="w-full max-w-32 bg-blue-500 p-2 rounded">Clear Form</button>
+            </div>
+            
+            
+
+            
+            
+
+        </div>
+
+        <!-- <label for="cif">Branch Name:</label>
+        <input id="cif" type="text" name="CIF" class="bg-blue-500">
+
+        <label for="cif">Branch No:</label>
+        <input id="cif" type="text" name="CIF" class="bg-blue-500">
+
+        <label for="cif">CIF No:</label>
+        <input id="cif" type="text" name="CIF" class="bg-blue-500">
+
+        <label for="cif">Deal No:</label>
+        <input id="cif" type="text" name="CIF" class="bg-blue-500">
+
+        <label for="cif">Product Type:</label>
+        <input id="cif" type="text" name="CIF" class="bg-blue-500">
+
+        <label for="cif">Final Amount:</label>
+        <input id="cif" type="text" name="CIF" class="bg-blue-500"> -->
+        
+    </form>
+</body>
+</html>
