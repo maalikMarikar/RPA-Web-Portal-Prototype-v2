@@ -40,8 +40,8 @@
         <div class="flex-[500] flex">
             <div class="flex-[1] bg-[#333333] text-white p-2 space-y-2 border-blue-600 border-r-2 border-r shadow-lg">
                 <div class="w-full text-center font-bold text-xl">Settlements</div>
-                <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700" onclick="loadForm('RegularSettlement')">Regular Settlement</button>
-                <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700">Early Settlement Ijara</button>
+                <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700" onclick="populateFormArea('RegularSettlement')">Regular Settlement</button>
+                <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700" onclick="refresh()">Early Settlement Ijara</button>
                 <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700">WMT Full Settlement</button>
                 <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700">WMT Partial Settlement</button>
                 <button class="w-full p-2 bg-blue-500 rounded-lg hover:bg-blue-700">DM Full Settlement</button>
@@ -62,10 +62,12 @@
 </body>
 <script>
 
+    function captureUser(){
+        document.getElementById("userr").innerHTML = GetCookie("uzn")
+    }
     
     document.getElementById("usir").innerHTML = GetCookie("uzn");
     
-
     
     document.getElementById("brn").innerHTML = GetCookie("brnch");
 
@@ -74,14 +76,31 @@
     
 
 
+    async function populateFormArea(name){
+        let response =  await fetch(`/MainPage/${name}/`)
+        document.getElementById("formArea").innerHTML = await response.text();
 
-   function GetCookie(){
-       
+        let uz = GetCookie("uzn");
+        let usrInput = document.querySelector("#formArea input[name='userr']")
+        if (usrInput) usrInput.value = uz;
+    }
+
+   function GetCookie(name){
+       let cookies = document.cookie.split(";").map(i=>i.trim())
+       for(let ck of cookies){
+           if(ck.startsWith(name + "=")){
+               return decodeURIComponent(ck.substring(name.length + 1))
+           }
+       }
+       return null
    }
 
     async function refresh(){
         try{
-            let refRes = await fetch("/Login/Refresh/")
+            const refRes = await fetch("/Login/Refresh", {
+                method: "POST",
+                credentials: "include"
+            });
             if(!refRes.ok){
                 throw new Error("Refresh Failed")
             }
@@ -90,6 +109,23 @@
             alert(e)
         }
     }
+    
+    // window.onload = async function(){
+    //     let refres = await fetch("/Login/Refresh/")
+    // }
+
+    window.onload = async function() {
+        try {
+            await refresh(); // call your existing function
+            console.log("Session refreshed successfully");
+        } catch (e) {
+            alert("Refresh failed: " + e.message);
+            // Optionally redirect to login page if refresh fails
+            window.location.href = "/Login/";
+        }
+    };
+
+
 </script>
 
 </html>
